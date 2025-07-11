@@ -1,0 +1,23 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/focal64"
+
+  config.vm.define "aakhrifS" do |master|
+    master.vm.hostname = "aakhrifSp2"
+
+    # Use host-only network (reachable from host)
+    master.vm.network "private_network", ip: "192.168.56.110"
+
+    # VirtualBox provider settings
+    master.vm.provider "virtualbox" do |vb|
+      vb.name = "aakhrifSp2"        # Preferred way to name the VM
+      vb.memory = 1024              # Allocate 1 GB RAM
+      vb.cpus = 2                   # Use 2 CPU cores
+    end
+
+    # Provisioning with shell script
+    master.vm.provision "shell", path: "./scripts/server_setup.sh"
+
+    # Sync a folder from host to guest (read-write)
+    master.vm.synced_folder "./confs", "/confs"  # safer to use a subfolder than "/"
+  end
+end
