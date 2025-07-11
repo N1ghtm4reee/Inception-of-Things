@@ -1,0 +1,4 @@
+The goal of this section is to set up a local virtual Kubernetes cluster using Vagrant with two virtual machines (VMs).
+We will use Vagrant to provision the VMs and Ansible to configure them and install K3s, creating a functioning local cluster.
+
+That's all.
