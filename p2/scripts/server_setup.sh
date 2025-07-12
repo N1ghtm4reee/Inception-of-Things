@@ -17,5 +17,14 @@ TOKEN=$(sudo cat /var/lib/rancher/k3s/server/node-token)
 # Store the token for the workers to use
 # echo $TOKEN > /vagrant/token
 
-kubectl apply -f /confs/app1.yaml
+kubectl apply -f /confs/app1/app1-config.yaml
+kubectl apply -f /confs/app1/app1.yaml
+
+kubectl apply -f /confs/app2/app2-config.yaml
+kubectl apply -f /confs/app2/app2.yaml
+
+kubectl apply -f /confs/app3/app3-config.yaml
+kubectl apply -f /confs/app3/app3.yaml
+
+
 kubectl apply -f /confs/ingress.yaml
