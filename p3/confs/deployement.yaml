@@ -21,17 +21,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: app   # Name of the Service, matching the application name in Argo CD
-  namespace: dev         # The namespace where your application and Service are deployed
+  name: app
+  namespace: dev
   labels:
-    app: app  # Labels for the Service itself (optional but good practice)
+    app: app
 spec:
   selector:
-    app: app  # This selector must match the 'app' label on your Pods
-                         # (from your Deployment, e.g., wil-playground-deployment)
+    app: app
   ports:
     - protocol: TCP
-      port: 80           # The port the Service will expose (e.g., for Ingress or other internal services)
-      targetPort: 8888   # The port your 'wil-playground' application is listening on inside its Pods 
-  type: NodePort        # Default type, accessible only from within the cluster.
-                         # Change to NodePort or LoadBalancer if external access is needed.
+      port: 80
+      targetPort: 8888
+      nodePort: 30088  # <-- You can choose a port between 30000-32767
+  type: NodePort
