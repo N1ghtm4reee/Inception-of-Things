@@ -29,21 +29,22 @@ echo "ArgoCD admin password: $ARGOCD_PASSWORD"
 argocd login localhost:8443 --username admin --password $ARGOCD_PASSWORD --insecure
 
 argocd app create developement \
-  --repo https://github.com/N1ghtm4reee/Inception-of-Things \
+  --repo https://github.com/N1ghtm4reee/Inception-of-Things.git \
   --path p3/confs \
   --dest-server https://kubernetes.default.svc \
-  --dest-namespace dev
+  --dest-namespace dev \
+  --sync-policy automated
 
 argocd app sync developement
 
-# # # wait for app deployment to be ready
+# wait for app deployment to be ready
 echo "Waiting for app deployment to be ready..."
 kubectl wait --for=condition=available --timeout=300s deployment/app -n dev
 
-# # # get pod name after deployment is ready
+# get pod name after deployment is ready
 POD_NAME=$(kubectl get pods -n dev --no-headers | grep "^app" | awk '{print $1}' | head -n 1)
 
-# # # expose app port
+# expose app port
 kubectl port-forward $POD_NAME -n dev 8888:8888 > /dev/null 2>&1 &
 APP_PF_PID=$!
 
