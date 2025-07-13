@@ -33,5 +33,5 @@ spec:
     - protocol: TCP
       port: 80           # The port the Service will expose (e.g., for Ingress or other internal services)
       targetPort: 8888   # The port your 'wil-playground' application is listening on inside its Pods 
-  type: ClusterIP        # Default type, accessible only from within the cluster.
+  type: NodePort        # Default type, accessible only from within the cluster.
                          # Change to NodePort or LoadBalancer if external access is needed.
