@@ -1,5 +1,8 @@
 #!/bin/bash
 
+apt update
+apt install -y curl
+
 # Install K3s on the master node
 curl -sfL https://get.k3s.io | sh -
 

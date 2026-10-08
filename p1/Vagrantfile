@@ -1,13 +1,13 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/focal64"  # Ubuntu 20.04
+  config.vm.box = "debian/bookworm64"
 
   config.vm.define "aakhrifS" do |master|
     master.vm.hostname = "aakhrifS"
     master.vm.network "private_network", ip: "192.168.56.110", virtualbox__intnet: "eth1"
     master.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+      vb.memory = "2048"
       vb.cpus = 2
-      vb.customize ["modifyvm", :id, "--name", "aakhrifS"]
+      # vb.customize ["modifyvm", :id, "--name", "aakhrifS"]
     end
     master.vm.provision "shell", path: "server_setup.sh"
   end
@@ -16,9 +16,9 @@ Vagrant.configure("2") do |config|
     worker.vm.hostname = "aakhrifSW"
     worker.vm.network "private_network", ip: "192.168.56.111", virtualbox__intnet: "eth1"
     worker.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+      vb.memory = "2048"
       vb.cpus = 2
-      vb.customize ["modifyvm", :id, "--name", "aakhrifSW"]
+      # vb.customize ["modifyvm", :id, "--name", "aakhrifSW"]
     end
     worker.vm.provision "shell", path: "worker_setup.sh"
   end
