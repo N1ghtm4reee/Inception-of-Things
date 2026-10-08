@@ -5,6 +5,7 @@ metadata:
   labels:
     app: will
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: will
@@ -14,10 +15,10 @@ spec:
         app: will
     spec:
       containers:
-      - name: will
-        image: wil42/playground:v1
-        ports:
-        - containerPort: 8888
+        - name: will
+          image: wil42/playground:v1
+          ports:
+            - containerPort: 8888
 ---
 apiVersion: v1
 kind: Service
@@ -28,7 +29,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-      app: will
+    app: will
   ports:
     - protocol: TCP
       port: 8888
